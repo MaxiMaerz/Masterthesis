@@ -78,6 +78,28 @@ def select_features(features_list, data):
     return f_index.astype(int), f_dic, t_index.astype(int), t_dic
 
 
+
+def choose_random_data(data, target, length):
+    '''
+    Get a Random Party of Data with size: length
+    :param data: np.array containing data
+    :param target:  np.array containing targets
+    :param length: integer
+    :return: random target and data slice of original data.
+    The Order remains(data[1] corespons to target[1]
+    '''
+    random_index = np.random.randint(0, len(data[0]))
+    random_data = data[:,random_index]
+    random_target = target[:,random_index]
+
+    for x in range(1, length):
+        random_index = np.random.randint(0, len(data[0]))
+        random_data = np.vstack((random_data, data[:,random_index]))
+        random_target = np.vstack((random_target, target[:,random_index]))
+    return random_data, random_target
+
+
+
 if __name__ == '__main__':
     '''We want all file opening stuff here o avoid confusion'''
     Path = '/home/maxi/data/'   #Path to data Folder
@@ -100,5 +122,5 @@ if __name__ == '__main__':
 
     '''Start the Main'''
 
-
-   
+    '''Get a random Partof the Data'''
+    random_slice_data, random_slice_target = choose_random_data(all_data_test, all_targets_test, 50)
