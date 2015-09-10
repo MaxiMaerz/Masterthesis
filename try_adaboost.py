@@ -87,7 +87,7 @@ if __name__ == '__main__':
     hdulist_valid = fits.open(Path + 'y1a1_stripe82_valid_subset.fits')
     feature_conf = [line.strip() for line in open(Path + '/fields.conf', 'r')]
 
-    '''Get config'''
+    '''Get config aa'''
     feature_index, feature_dic, target_index, target_dic = select_features(feature_conf, hdulist_test)
 
     '''Get data'''
