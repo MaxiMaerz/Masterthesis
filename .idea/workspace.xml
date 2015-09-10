@@ -6,7 +6,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/try_adaboost.py" afterPath="$PROJECT_DIR$/try_adaboost.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Masterthesis.iws" />
@@ -406,7 +405,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441890271413</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="&quot;added comment&quot;">
+      <created>1441891455038</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1441891455038</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -447,7 +452,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;First Upload&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;First Upload&quot;" />
+    <MESSAGE value="&quot;added comment&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;added comment&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
