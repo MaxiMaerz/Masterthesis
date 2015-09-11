@@ -5,8 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/decision_tree_tester.py" line="19" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="&quot;correctet feature selection(wrong loop index), added weight array&quot;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/try_adaboost.py" afterPath="$PROJECT_DIR$/try_adaboost.py" />
+    <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Masterthesis.iws" />
@@ -429,7 +428,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441958543316</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="&quot;correctet feature selection(wrong loop index), added weight array&quot;">
+      <created>1441970689867</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1441970689867</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
