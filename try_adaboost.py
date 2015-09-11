@@ -13,6 +13,7 @@ def generate_array(hdulist, features, targets):
     """
     generates a numpy array from a hdu_list from astropy
     it skips all strings and keeps just number like coloums
+
     :param hdulist: Astropy HDU_List object
     :param features: Desired features
     :param targets: Desired teargets
@@ -37,20 +38,21 @@ def generate_array(hdulist, features, targets):
     targets_float = np.squeeze(np.array(astro_data.field(targets[0])))
     for x in range(len(targets)):
         targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
-        print(hdulist_test[1].columns.names[targets[x]])
-    print(targets_float)
+        print('Selected Feature: ' + hdulist_test[1].columns.names[targets[x]])
     '''return'''
     return data_float, targets_float
 
 
 def select_features(features_list, data):
-    '''
+    """
     Function extrats features and targets from config file
+
     -> has to be testet  for stability
     :param features_list: String Objects from config file
     :param data: HDU_List from Astropy
     :return: Numpy int arrays with indexes and dictonaries if needed
-    '''
+    """
+
     '''Initalize arrays'''
     f_index = []
     f_dic = {}
@@ -71,40 +73,60 @@ def select_features(features_list, data):
                 f_dic.update({features_list[y]: x})
 
             if features_list[y][:1] == '!' \
-                and features_list[y][1:] == data[1].columns.names[x]:
+                    and features_list[y][1:] == data[1].columns.names[x]:
                 t_index = np.append(t_index, x)
                 t_dic.update({features_list[y][1:]: x})
-                print(features_list[x][:1])
 
-    print(t_dic)
     return f_index.astype(int), f_dic, t_index.astype(int), t_dic
 
 
+def normalize(vector):
+    """
+    normalize a numpy vector with [i] = [i]/sum[i]
 
-def choose_random_data(data, target, length):
-    '''
+    :param vector: numpy vector
+    :return: normalized vector
+    """
+
+    normalized_vector = vector / np.linalg.norm(vector)
+    print(normalized_vector)
+
+
+def choose_random_data(data, target, weigth, length):
+    """
     Get a Random Party of Data with size: length
+
     :param data: np.array containing data
     :param target:  np.array containing targets
     :param length: integer
     :return: random target and data slice of original data.
     The Order remains(data[1] corespons to target[1]
-    '''
-    random_index = np.random.randint(0, len(data[0]))
-    random_data = data[:,random_index]
-    random_target = target[:,random_index]
+    """
 
-    for x in range(1, length):
-        random_index = np.random.randint(0, len(data[0]))
-        random_data = np.vstack((random_data, data[:,random_index]))
-        random_target = np.vstack((random_target, target[:,random_index]))
+    '''We need to generate an 1D index array to use np.random.choice'''
+    index_arr = np.arange(0, len(data[1]))
+
+    '''Normalize probabilties'''
+    norm_weight = normalize(weigth)
+    '''No we draw with respect to weight'''
+    random_index_arr = np.random.choice(index_arr, size=int(length), replace=True, p=norm_weight)
+
+    random_data = data[:, random_index_arr]
+    random_target = target[:, random_index_arr]
+
     return random_data, random_target
+
+
+def build_weighted_tree(data, target, parameter):
+    clf = tree.DecisionTreeRegressor(parameter)
+    clf.fit(np.expand_dims(data, target))
+
 
 
 
 if __name__ == '__main__':
     '''We want all file opening stuff here o avoid confusion'''
-    Path = '/home/maxi/data/'   #Path to data Folder
+    Path = '/home/maxi/data/'
 
     '''Opening data and config files'''
     hdulist_test = fits.open(Path + 'y1a1_stripe82_train_subset.fits')
@@ -125,8 +147,14 @@ if __name__ == '__main__':
     '''Start the Main'''
 
     '''Add weight coloumn'''
-    all_targets_test = np.vstack((all_targets_test, np.ones((1, len(all_targets_test[0])), dtype='float64')))
-    print(all_targets_test)
-    '''Get a random Part of the Data'''
-    random_slice_data, random_slice_target = choose_random_data(all_data_test, all_targets_test, 50)
+    all_targets_test = np.vstack((all_targets_test,
+                                  np.ones((1, len(all_targets_test[0])),
+                                  dtype='float64')))
 
+    '''Get a random Part of the Data'''
+    random_slice_data, random_slice_target = choose_random_data(all_data_test,
+                                                                all_targets_test,
+                                                                all_targets_test[-1],
+                                                                50)
+
+    #build_weighted_tree()
