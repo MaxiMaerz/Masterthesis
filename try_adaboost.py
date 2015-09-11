@@ -7,6 +7,7 @@ from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
 from time import time
 from operator import itemgetter
+from sklearn.metrics import mean_squared_error
 
 
 def generate_array(hdulist, features, targets):
@@ -88,11 +89,11 @@ def normalize(vector):
     :return: normalized vector
     """
 
-    normalized_vector = vector / np.linalg.norm(vector)
-    print(normalized_vector)
+    normalized_vector = vector / np.sum(vector)
+    return normalized_vector
 
 
-def choose_random_data(data, target, weigth, length):
+def choose_random_data(data, target, weight, length):
     """
     Get a Random Party of Data with size: length
 
@@ -107,21 +108,51 @@ def choose_random_data(data, target, weigth, length):
     index_arr = np.arange(0, len(data[1]))
 
     '''Normalize probabilties'''
-    norm_weight = normalize(weigth)
+    norm_weight = normalize(weight)
+
     '''No we draw with respect to weight'''
     random_index_arr = np.random.choice(index_arr, size=int(length), replace=True, p=norm_weight)
 
     random_data = data[:, random_index_arr]
     random_target = target[:, random_index_arr]
-
     return random_data, random_target
 
 
-def build_weighted_tree(data, target, parameter):
-    clf = tree.DecisionTreeRegressor(parameter)
-    clf.fit(np.expand_dims(data, target))
+def build_weighted_tree(data, target, weights, parameter=0):
+    """
+    We construct a Tree via skipi_tree_regressor and calculate the MSE and update weights
 
+    Note: we use train_test_split to get a valisation sample
+    :param data: np.array
+    :param target: np.array
+    :param parameter: Hyperparameters for the tree (not implemented)
 
+    :return:updated weights
+    """
+
+    '''Split data  -> not possible we need to track the index for weight update.....'''
+    #x_train, x_test, y_train, y_test = train_test_split(data, target, test_size=0.5)
+
+    '''Build tree'''
+    clf = tree.DecisionTreeRegressor(max_depth=10)
+    clf.fit(data, target)
+    predicted = clf.predict(data)
+
+    '''Calculate Mean squared Error'''
+    MSE = mean_squared_error(target, predicted, sample_weight=None)
+
+    '''Calculate Distance between predicted and real'''
+    Delta = abs(predicted-target)
+
+    Error = Delta / np.amax(Delta)
+
+    'Update Weights'
+
+    weights = weights * Error
+
+    print(Delta)
+
+    return clf, Error
 
 
 if __name__ == '__main__':
@@ -155,6 +186,22 @@ if __name__ == '__main__':
     random_slice_data, random_slice_target = choose_random_data(all_data_test,
                                                                 all_targets_test,
                                                                 all_targets_test[-1],
-                                                                50)
+                                                                10000)
 
-    #build_weighted_tree()
+    '''Generate List of Estimators'''
+
+    Estimator_List = []
+    hyper_parameter = 0
+    '''Append new Estimator to List'''
+
+    clf = build_weighted_tree(random_slice_data.T,
+                              random_slice_target[0],
+                              random_slice_target[-1],
+                              hyper_parameter)
+
+    '''To DO:
+        check the stuff !!!!!
+
+        ->implement the Tree
+
+    '''
