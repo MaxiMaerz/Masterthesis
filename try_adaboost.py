@@ -37,8 +37,8 @@ def generate_array(hdulist, features, targets):
     targets_float = np.squeeze(np.array(astro_data.field(targets[0])))
     for x in range(len(targets)):
         targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
-        #print(hdulist_test[1].columns.names[targets[x]])
-
+        print(hdulist_test[1].columns.names[targets[x]])
+    print(targets_float)
     '''return'''
     return data_float, targets_float
 
@@ -70,11 +70,13 @@ def select_features(features_list, data):
                 f_index = np.append(f_index, x)
                 f_dic.update({features_list[y]: x})
 
-            if features_list[x][:1] == '!' \
-                    and features_list[y][1:] == data[1].columns.names[x]:
-                    t_index = np.append(t_index, x)
-                    t_dic.update({features_list[y][1:]: x})
+            if features_list[y][:1] == '!' \
+                and features_list[y][1:] == data[1].columns.names[x]:
+                t_index = np.append(t_index, x)
+                t_dic.update({features_list[y][1:]: x})
+                print(features_list[x][:1])
 
+    print(t_dic)
     return f_index.astype(int), f_dic, t_index.astype(int), t_dic
 
 
@@ -122,5 +124,9 @@ if __name__ == '__main__':
 
     '''Start the Main'''
 
-    '''Get a random Partof the Data'''
+    '''Add weight coloumn'''
+    all_targets_test = np.vstack((all_targets_test, np.ones((1, len(all_targets_test[0])), dtype='float64')))
+    print(all_targets_test)
+    '''Get a random Part of the Data'''
     random_slice_data, random_slice_target = choose_random_data(all_data_test, all_targets_test, 50)
+
