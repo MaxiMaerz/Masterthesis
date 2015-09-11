@@ -434,7 +434,13 @@
       <option name="project" value="LOCAL" />
       <updated>1441970689867</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fixed random_slice">
+      <created>1441970723588</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1441970723588</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -477,7 +483,8 @@
     <MESSAGE value="&quot;First Upload&quot;" />
     <MESSAGE value="&quot;added comment&quot;" />
     <MESSAGE value="&quot;correctet feature selection(wrong loop index), added weight array&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;correctet feature selection(wrong loop index), added weight array&quot;" />
+    <MESSAGE value="fixed random_slice" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed random_slice" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
