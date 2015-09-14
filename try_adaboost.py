@@ -88,9 +88,11 @@ def normalize(vector):
     :param vector: numpy vector
     :return: normalized vector
     """
-
-    normalized_vector = vector / np.sum(vector)
-    return normalized_vector
+    if np.sum(vector) != 1.:
+        normalized_vector = vector / np.sum(vector)
+        return normalized_vector
+    else:
+        return vector
 
 
 def choose_random_data(data, target, weight, length):
@@ -134,7 +136,7 @@ def build_weighted_tree(data, target, parameter=0):
     x_train, x_test, y_train, y_test = train_test_split(data, target[0], test_size=0.5)
 
     '''Build tree slice last coloumn (its just index)'''
-    clf = tree.DecisionTreeRegressor(max_depth=10)
+    clf = tree.DecisionTreeRegressor()
     clf.fit(x_train[:, 0:-1], y_train)
     predicted = clf.predict(x_test[:, 0:-1])
 
@@ -147,6 +149,8 @@ def build_weighted_tree(data, target, parameter=0):
     '''Calculate the Error'''
     error = delta / np.amax(delta)
     error = np.vstack((error, x_test[:,-1].T))
+    if np.amax(delta) == 0:
+        print(delta)
 
     return clf, error, mse
 
@@ -159,9 +163,19 @@ def update_weights(Error, weights):
     :param weights: weight vector
     :return: nothing, we change the vector here
     """
-    for i in range(len(Error[-1])):
-        weights[Error[-1][i]] = Error[0][i]
 
+    '''Calculate the Average Error L_bar
+
+        L_bar = sum_i^N L_i * w_i
+        where L_i is Error at ith element and w_i is the weight
+    '''
+    L_bar = 0.
+    weights_normal = normalize(weights)
+    for i in range(len(Error[0])):
+        L_bar += Error[0][i] * weights_normal[Error[-1][i]]
+    betha = abs(L_bar/(1-L_bar))
+    for i in range(len(Error[-1])):
+        weights[Error[-1][i]] = betha ** (1 - Error[0][i]) * weights_normal[Error[-1][i]]
 
 
 if __name__ == '__main__':
@@ -193,29 +207,71 @@ if __name__ == '__main__':
 
     '''Add weight coloumn'''
     all_targets_test = np.vstack((all_targets_test,
-                                  np.ones((1, len(all_targets_test[0])),
-                                  dtype='float64')))
-
-    '''Get a random Part of the Data'''
-    random_slice_data, random_slice_target = choose_random_data(all_data_test,
-                                                                all_targets_test,
-                                                                all_targets_test[-1],
-                                                                10000)
-
+                                  normalize(np.ones((1, len(all_targets_test[0])),
+                                  dtype='float64'))))
     '''Generate List of Estimators'''
 
-    estimator_List = []
+    estimator_list = []
     hyper_parameter = 0
     mse_list = []
-    '''Append new Estimator to List'''
+    start = time()
+    for iter in range(0, 300):
+        print(iter)
+        '''Get a random Part of the Data'''
+        random_slice_data, random_slice_target = choose_random_data(all_data_test,
+                                                                    all_targets_test,
+                                                                    all_targets_test[-1],
+                                                                    3000)
 
-    estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
-                              random_slice_target,
-                              hyper_parameter)
+        '''Append new Estimator to List'''
 
-    estimator_List.append(estimator)
-    mse_list.append(mean_s_error)
+        estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
+                                  random_slice_target,
+                                  hyper_parameter)
 
-    '''update weights'''
-    update_weights(error_array, all_targets_test[-1])
-    print(all_targets_test[-1])
+        estimator_list.append(estimator)
+        mse_list.append(mean_s_error)
+
+        '''update weights'''
+        update_weights(error_array, all_targets_test[-1])
+    stop = time()
+    print('Execution time : ' + str(np.round(stop-start, 3)) + ' seconds' + '\n'
+              'at ' +str(iter)+ ' iteration')
+    '''Test the estimator'''
+    predicted = np.zeros(len(all_data_valid[0]))
+    mse_list_ret = np.empty(len(mse_list))
+    for i in range(0, len(mse_list)):
+        mse_list_ret[i] = 1. / mse_list[i]
+    normalized_mse = normalize(mse_list_ret)
+    for est in range(len(estimator_list)):
+        '''Predict'''
+        predicted += estimator_list[est].predict(all_data_valid.T) * normalized_mse[est]
+        '''weight by mse'''
+    #predicted = predicted / len(estimator_list)
+    '''Get some statistics'''
+    print(mean_squared_error(all_targets_valid[0], predicted, sample_weight=None))
+    Delta = all_targets_valid[0] - predicted
+    mean = np.mean(Delta)
+    Delta_res = Delta / (1 + all_targets_valid[0])
+    print(#'Delta = ' + str(np.sum(abs(Delta))/) + '\n'
+          'Mean = ' + str(mean) + '\n')
+          #'Delta_res = ' + str(Delta_res) + '\n')
+    hist, bins = np.histogram(Delta_res, bins = 300)
+    width = 1. * (bins[1] - bins[0])
+    center = (bins[:-1] + bins[1:]) / 2
+    plt.bar(center, hist, align='center', width=width, color='g')
+    #plt.bar(center, hist_2, align='center', width=width, color='r')
+    plt.show()
+
+"""
+    print(mse_list)
+    plt.plot(mse_list, '.')
+    plt.show()
+
+    hist, bins = np.histogram(mse_list, bins = 20)
+    width = 1. * (bins[1] - bins[0])
+    center = (bins[:-1] + bins[1:]) / 2
+    plt.bar(center, hist, align='center', width=width, color='g')
+    #plt.bar(center, hist_2, align='center', width=width, color='r')
+    plt.show()
+    """
