@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adaboost_from_lib.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/try_adaboost.py" afterPath="$PROJECT_DIR$/try_adaboost.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -27,8 +28,8 @@
       <file leaf-file-name="try_adaboost.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/try_adaboost.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7364017">
-              <caret line="260" column="37" selection-start-line="260" selection-start-column="37" selection-end-line="260" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.54811716">
+              <caret line="266" column="51" selection-start-line="266" selection-start-column="51" selection-end-line="266" selection-end-column="51" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -71,6 +72,7 @@
         <option value="$PROJECT_DIR$/try_adabiist.py" />
         <option value="$PROJECT_DIR$/generate_matrix.py" />
         <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/adaboost_from_lib.py" />
         <option value="$PROJECT_DIR$/try_adaboost.py" />
       </list>
     </option>
@@ -143,23 +145,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.try_adaboost">
-    <configuration default="false" name="astropy_show_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Masterthesis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/astropy_show_data.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="generate_matrix" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -224,6 +209,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Masterthesis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="adaboost_from_lib" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Masterthesis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/adaboost_from_lib.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -351,19 +353,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.astropy_show_data" />
-      <item index="1" class="java.lang.String" itemvalue="Python.generate_matrix" />
-      <item index="2" class="java.lang.String" itemvalue="Python.decision_tree_tester" />
-      <item index="3" class="java.lang.String" itemvalue="Python.try_adaboost" />
-      <item index="4" class="java.lang.String" itemvalue="Python.test" />
+      <item index="0" class="java.lang.String" itemvalue="Python.generate_matrix" />
+      <item index="1" class="java.lang.String" itemvalue="Python.decision_tree_tester" />
+      <item index="2" class="java.lang.String" itemvalue="Python.try_adaboost" />
+      <item index="3" class="java.lang.String" itemvalue="Python.test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.adaboost_from_lib" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.try_adaboost" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test" />
-        <item index="2" class="java.lang.String" itemvalue="Python.generate_matrix" />
-        <item index="3" class="java.lang.String" itemvalue="Python.decision_tree_tester" />
-        <item index="4" class="java.lang.String" itemvalue="Python.astropy_show_data" />
+        <item index="1" class="java.lang.String" itemvalue="Python.adaboost_from_lib" />
+        <item index="2" class="java.lang.String" itemvalue="Python.test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.generate_matrix" />
+        <item index="4" class="java.lang.String" itemvalue="Python.decision_tree_tester" />
       </list>
     </recent_temporary>
   </component>
@@ -474,12 +476,18 @@
       <option name="project" value="LOCAL" />
       <updated>1442220808653</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing">
+      <created>1442237332635</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1442237332635</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1600" height="873" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -522,7 +530,8 @@
     <MESSAGE value="removed stuff all stuff but adaboost" />
     <MESSAGE value="made correction (weights) and started on the weightening iteration" />
     <MESSAGE value="Added index column, &#10;weights get updated still not sure about update function,&#10;-&gt; loop still missing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added index column, &#10;weights get updated still not sure about update function,&#10;-&gt; loop still missing" />
+    <MESSAGE value="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -588,16 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.4/site-packages/sklearn/cross_validation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33263597">
@@ -614,10 +613,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41422594">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7740586">
+          <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/try_adaboost.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7364017">
-          <caret line="260" column="37" selection-start-line="260" selection-start-column="37" selection-end-line="260" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.54811716">
+          <caret line="266" column="51" selection-start-line="266" selection-start-column="51" selection-end-line="266" selection-end-column="51" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>

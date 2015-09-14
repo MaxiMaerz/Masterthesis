@@ -215,16 +215,15 @@ if __name__ == '__main__':
     hyper_parameter = 0
     mse_list = []
     start = time()
-    for iter in range(0, 300):
+    for iter in range(0, 3000):
         print(iter)
         '''Get a random Part of the Data'''
         random_slice_data, random_slice_target = choose_random_data(all_data_test,
                                                                     all_targets_test,
                                                                     all_targets_test[-1],
-                                                                    3000)
+                                                                    300)
 
         '''Append new Estimator to List'''
-
         estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
                                   random_slice_target,
                                   hyper_parameter)
@@ -234,20 +233,27 @@ if __name__ == '__main__':
 
         '''update weights'''
         update_weights(error_array, all_targets_test[-1])
+
     stop = time()
+
     print('Execution time : ' + str(np.round(stop-start, 3)) + ' seconds' + '\n'
               'at ' +str(iter)+ ' iteration')
     '''Test the estimator'''
     predicted = np.zeros(len(all_data_valid[0]))
     mse_list_ret = np.empty(len(mse_list))
+
     for i in range(0, len(mse_list)):
         mse_list_ret[i] = 1. / mse_list[i]
     normalized_mse = normalize(mse_list_ret)
+    list_min = []
+    list_max = []
     for est in range(len(estimator_list)):
-        '''Predict'''
+        '''Predict and weight by mse'''
         predicted += estimator_list[est].predict(all_data_valid.T) * normalized_mse[est]
-        '''weight by mse'''
-    #predicted = predicted / len(estimator_list)
+        list_min.append(estimator_list[est].feature_importances_.argmin())
+        list_max.append(estimator_list[est].feature_importances_.argmax())
+
+
     '''Get some statistics'''
     print(mean_squared_error(all_targets_valid[0], predicted, sample_weight=None))
     Delta = all_targets_valid[0] - predicted
@@ -256,22 +262,11 @@ if __name__ == '__main__':
     print(#'Delta = ' + str(np.sum(abs(Delta))/) + '\n'
           'Mean = ' + str(mean) + '\n')
           #'Delta_res = ' + str(Delta_res) + '\n')
-    hist, bins = np.histogram(Delta_res, bins = 300)
+
+    hist, bins = np.histogram(list_max, bins = 18)
+    hist2, bins2 = np.histogram(list_min, bins = 18)
     width = 1. * (bins[1] - bins[0])
     center = (bins[:-1] + bins[1:]) / 2
     plt.bar(center, hist, align='center', width=width, color='g')
-    #plt.bar(center, hist_2, align='center', width=width, color='r')
+    plt.bar(center, hist2, align='center', width=width, color='r')
     plt.show()
-
-"""
-    print(mse_list)
-    plt.plot(mse_list, '.')
-    plt.show()
-
-    hist, bins = np.histogram(mse_list, bins = 20)
-    width = 1. * (bins[1] - bins[0])
-    center = (bins[:-1] + bins[1:]) / 2
-    plt.bar(center, hist, align='center', width=width, color='g')
-    #plt.bar(center, hist_2, align='center', width=width, color='r')
-    plt.show()
-    """
