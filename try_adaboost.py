@@ -8,6 +8,7 @@ from sklearn.grid_search import GridSearchCV, RandomizedSearchCV
 from time import time
 from operator import itemgetter
 from sklearn.metrics import mean_squared_error
+import sys
 
 
 def generate_array(hdulist, features, targets):
@@ -215,13 +216,19 @@ if __name__ == '__main__':
     hyper_parameter = 0
     mse_list = []
     start = time()
-    for iter in range(0, 3000):
-        print(iter)
+    n_estimators = 200
+    for iter in range(0, n_estimators):
+        '''waste computing power for loading bar'''
+        step = n_estimators/100
+        if iter%step == 0:
+            print('\rTraining: %s (%d%%)' % ("|"*(int(iter/step)), iter/step), end="")
+        sys.stdout.flush()
+        '''Start the tarining'''
         '''Get a random Part of the Data'''
         random_slice_data, random_slice_target = choose_random_data(all_data_test,
                                                                     all_targets_test,
                                                                     all_targets_test[-1],
-                                                                    300)
+                                                                    3000)
 
         '''Append new Estimator to List'''
         estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
@@ -268,5 +275,6 @@ if __name__ == '__main__':
     width = 1. * (bins[1] - bins[0])
     center = (bins[:-1] + bins[1:]) / 2
     plt.bar(center, hist, align='center', width=width, color='g')
+    plt.show()
     plt.bar(center, hist2, align='center', width=width, color='r')
     plt.show()

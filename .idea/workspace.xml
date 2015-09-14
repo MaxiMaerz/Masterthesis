@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adaboost_from_lib.py" afterPath="$PROJECT_DIR$/adaboost_from_lib.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/try_adaboost.py" afterPath="$PROJECT_DIR$/try_adaboost.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Masterthesis.iws" />
@@ -26,10 +28,22 @@
       <file leaf-file-name="try_adaboost.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/try_adaboost.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.54811716">
-              <caret line="266" column="51" selection-start-line="266" selection-start-column="51" selection-end-line="266" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.79079497">
+              <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adaboost_from_lib.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -486,7 +500,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442240873947</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="added feature importance&#10;-&gt; Need to check maybe add unit testing">
+      <created>1442240910657</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1442240910657</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -623,15 +643,15 @@
         <state vertical-scroll-proportion="0.41422594">
           <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#53#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7740586">
-          <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -640,8 +660,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/try_adaboost.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54811716">
-          <caret line="266" column="51" selection-start-line="266" selection-start-column="51" selection-end-line="266" selection-end-column="51" />
+        <state vertical-scroll-proportion="0.79079497">
+          <caret line="231" column="0" selection-start-line="231" selection-start-column="0" selection-end-line="231" selection-end-column="0" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>

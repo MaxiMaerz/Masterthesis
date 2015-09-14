@@ -101,7 +101,9 @@ if __name__ == '__main__':
     start = time()
     clf = AdaBoostRegressor(n_estimators=300, loss='exponential')
     clf.fit(all_data_test.T, all_targets_test[0])
+    feature_importance = clf.feature_importances_
     stop = time()
     predicted = clf.predict(all_data_valid.T)
 
     print(mean_squared_error(all_targets_valid[0], predicted, sample_weight=None), abs(start-stop))
+    print(feature_importance)
