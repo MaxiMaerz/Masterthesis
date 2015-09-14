@@ -118,7 +118,7 @@ def choose_random_data(data, target, weight, length):
     return random_data, random_target
 
 
-def build_weighted_tree(data, target, weights, parameter=0):
+def build_weighted_tree(data, target, parameter=0):
     """
     We construct a Tree via skipi_tree_regressor and calculate the MSE and update weights
 
@@ -131,28 +131,37 @@ def build_weighted_tree(data, target, weights, parameter=0):
     """
 
     '''Split data  -> not possible we need to track the index for weight update.....'''
-    #x_train, x_test, y_train, y_test = train_test_split(data, target, test_size=0.5)
+    x_train, x_test, y_train, y_test = train_test_split(data, target[0], test_size=0.5)
 
-    '''Build tree'''
+    '''Build tree slice last coloumn (its just index)'''
     clf = tree.DecisionTreeRegressor(max_depth=10)
-    clf.fit(data, target)
-    predicted = clf.predict(data)
+    clf.fit(x_train[:, 0:-1], y_train)
+    predicted = clf.predict(x_test[:, 0:-1])
 
     '''Calculate Mean squared Error'''
-    MSE = mean_squared_error(target, predicted, sample_weight=None)
+    mse = mean_squared_error(y_test, predicted, sample_weight=None)
 
     '''Calculate Distance between predicted and real'''
-    Delta = abs(predicted-target)
+    delta = abs(predicted-y_test)
 
-    Error = Delta / np.amax(Delta)
+    '''Calculate the Error'''
+    error = delta / np.amax(delta)
+    error = np.vstack((error, x_test[:,-1].T))
 
-    'Update Weights'
+    return clf, error, mse
 
-    weights = weights * Error
 
-    print(Delta)
+def update_weights(Error, weights):
+    """
+    Updates weights with an exponential weight function.
 
-    return clf, Error
+    :param Error: Error array, with Error(first column) and index(second column)
+    :param weights: weight vector
+    :return: nothing, we change the vector here
+    """
+    for i in range(len(Error[-1])):
+        weights[Error[-1][i]] = Error[0][i]
+
 
 
 if __name__ == '__main__':
@@ -177,6 +186,11 @@ if __name__ == '__main__':
 
     '''Start the Main'''
 
+
+    '''Add the index to track'''
+    all_data_test = np.vstack((all_data_test,
+                                  np.arange(0, len(all_data_test[0]))))
+
     '''Add weight coloumn'''
     all_targets_test = np.vstack((all_targets_test,
                                   np.ones((1, len(all_targets_test[0])),
@@ -190,18 +204,18 @@ if __name__ == '__main__':
 
     '''Generate List of Estimators'''
 
-    Estimator_List = []
+    estimator_List = []
     hyper_parameter = 0
+    mse_list = []
     '''Append new Estimator to List'''
 
-    clf = build_weighted_tree(random_slice_data.T,
-                              random_slice_target[0],
-                              random_slice_target[-1],
+    estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
+                              random_slice_target,
                               hyper_parameter)
 
-    '''To DO:
-        check the stuff !!!!!
+    estimator_List.append(estimator)
+    mse_list.append(mean_s_error)
 
-        ->implement the Tree
-
-    '''
+    '''update weights'''
+    update_weights(error_array, all_targets_test[-1])
+    print(all_targets_test[-1])
