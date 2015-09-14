@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adaboost_from_lib.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/try_adaboost.py" afterPath="$PROJECT_DIR$/try_adaboost.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Masterthesis.iws" />
@@ -482,7 +480,13 @@
       <option name="project" value="LOCAL" />
       <updated>1442237332635</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="added feature importance&#10;-&gt; Need to check maybe add unit testing">
+      <created>1442240873947</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1442240873947</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -531,7 +535,8 @@
     <MESSAGE value="made correction (weights) and started on the weightening iteration" />
     <MESSAGE value="Added index column, &#10;weights get updated still not sure about update function,&#10;-&gt; loop still missing" />
     <MESSAGE value="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing" />
+    <MESSAGE value="added feature importance&#10;-&gt; Need to check maybe add unit testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="added feature importance&#10;-&gt; Need to check maybe add unit testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
