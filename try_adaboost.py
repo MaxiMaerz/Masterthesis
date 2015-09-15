@@ -9,6 +9,8 @@ from time import time
 from operator import itemgetter
 from sklearn.metrics import mean_squared_error
 import sys
+from scipy.stats import norm
+from scipy import optimize
 
 
 def generate_array(hdulist, features, targets):
@@ -121,7 +123,7 @@ def choose_random_data(data, target, weight, length):
     return random_data, random_target
 
 
-def build_weighted_tree(data, target, parameter=0):
+def build_weighted_tree(data, target, parameter):
     """
     We construct a Tree via skipi_tree_regressor and calculate the MSE and update weights
 
@@ -137,7 +139,7 @@ def build_weighted_tree(data, target, parameter=0):
     x_train, x_test, y_train, y_test = train_test_split(data, target[0], test_size=0.5)
 
     '''Build tree slice last coloumn (its just index)'''
-    clf = tree.DecisionTreeRegressor()
+    clf = tree.DecisionTreeRegressor(max_depth=parameter)
     clf.fit(x_train[:, 0:-1], y_train)
     predicted = clf.predict(x_test[:, 0:-1])
 
@@ -176,7 +178,22 @@ def update_weights(Error, weights):
         L_bar += Error[0][i] * weights_normal[Error[-1][i]]
     betha = abs(L_bar/(1-L_bar))
     for i in range(len(Error[-1])):
-        weights[Error[-1][i]] = betha ** (1 - Error[0][i]) * weights_normal[Error[-1][i]]
+        weights[Error[-1][i]] = betha ** (Error[0][i]) * weights_normal[Error[-1][i]]
+
+
+def report(grid_scores, n_top=3):
+    top_scores = sorted(grid_scores, key=itemgetter(1), reverse=True)[:n_top]
+    for i, score in enumerate(top_scores):
+        print("Model with rank: {0}".format(i + 1))
+        print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
+              score.mean_validation_score,
+              np.std(score.cv_validation_scores)))
+        print("Parameters: {0}".format(score.parameters))
+        print("")
+
+
+def gaus(x, a, b, c):
+    return a * np.exp(-(x - b)**2.0 / (2 * c**2))
 
 
 if __name__ == '__main__':
@@ -210,18 +227,32 @@ if __name__ == '__main__':
     all_targets_test = np.vstack((all_targets_test,
                                   normalize(np.ones((1, len(all_targets_test[0])),
                                   dtype='float64'))))
+
+    '''Launch Grid Search to get optimal Parameters for each tree'''
+    if False:
+        clf = tree.DecisionTreeRegressor()
+        params_to_explore = {'max_depth': np.arange(1, 25, 1),
+                            #'max_features': np.arange(1, 3, 1)
+                             }
+        grid_search = GridSearchCV(clf, param_grid=params_to_explore)
+        grid_search.fit(all_data_test.T, all_targets_test[0])
+
+        report(grid_search.grid_scores_)
+        sys.exit('Stop')
+
     '''Generate List of Estimators'''
 
     estimator_list = []
     hyper_parameter = 0
     mse_list = []
     start = time()
-    n_estimators = 200
+    n_estimators = 1000
+
     for iter in range(0, n_estimators):
         '''waste computing power for loading bar'''
         step = n_estimators/100
         if iter%step == 0:
-            print('\rTraining: %s (%d%%)' % ("|"*(int(iter/step)), iter/step), end="")
+            print('\rTraining: %s (%d%%)' % ("|"*(int(iter/(3*step))), iter/step), end="")
         sys.stdout.flush()
         '''Start the tarining'''
         '''Get a random Part of the Data'''
@@ -233,7 +264,7 @@ if __name__ == '__main__':
         '''Append new Estimator to List'''
         estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
                                   random_slice_target,
-                                  hyper_parameter)
+                                  9)
 
         estimator_list.append(estimator)
         mse_list.append(mean_s_error)
@@ -254,27 +285,93 @@ if __name__ == '__main__':
     normalized_mse = normalize(mse_list_ret)
     list_min = []
     list_max = []
+    list_all_features = []
     for est in range(len(estimator_list)):
         '''Predict and weight by mse'''
         predicted += estimator_list[est].predict(all_data_valid.T) * normalized_mse[est]
+        list_all_features.append(estimator_list[est].feature_importances_)
         list_min.append(estimator_list[est].feature_importances_.argmin())
         list_max.append(estimator_list[est].feature_importances_.argmax())
+    with open(Path + 'importance', 'w') as file:
+        for item in list_all_features:
+            file.write("{}\n".format(item))
 
 
     '''Get some statistics'''
     print(mean_squared_error(all_targets_valid[0], predicted, sample_weight=None))
-    Delta = all_targets_valid[0] - predicted
-    mean = np.mean(Delta)
-    Delta_res = Delta / (1 + all_targets_valid[0])
+    delta = all_targets_valid[0] - predicted
+    mean = np.mean(delta)
+    delta_res = delta / (1 + all_targets_valid[0])
     print(#'Delta = ' + str(np.sum(abs(Delta))/) + '\n'
           'Mean = ' + str(mean) + '\n')
           #'Delta_res = ' + str(Delta_res) + '\n')
+
+    '''Fit gausian on delat'''
+    mu_delta, std_delta = norm.fit(delta)
+    mu_delta_res, std_delta_res = norm.fit(delta_res)
 
     hist, bins = np.histogram(list_max, bins = 18)
     hist2, bins2 = np.histogram(list_min, bins = 18)
     width = 1. * (bins[1] - bins[0])
     center = (bins[:-1] + bins[1:]) / 2
+    
+    
     plt.bar(center, hist, align='center', width=width, color='g')
-    plt.show()
+    plt.savefig(Path + 'best_features.png')
+    plt.clf()
+    plt.close()
     plt.bar(center, hist2, align='center', width=width, color='r')
-    plt.show()
+    plt.savefig(Path + 'worst_features.png')
+    plt.clf()
+    plt.close()
+
+    '''Plotting histograms'''
+    data = plt.hist(delta, bins=150, normed=True, color='g')
+    x = [0.5 * (data[1][i] + data[1][i+1]) for i in range(len(data[1])-1)]
+    y = data[0]
+    popt, pcov = optimize.curve_fit(gaus, x, y)
+    perr = np.sqrt(np.diag(pcov))
+    scale_factor = popt[0]
+    mu_delta = popt[1]
+    sigma_delta = popt[2]
+    x_fit = np.linspace(x[0], x[-1], 100)
+    y_fit = gaus(x_fit, *popt)
+    plt.plot(x_fit, y_fit, lw=1, color="r")
+    title = "Fit results: a = %.f, mu = %.2f,  std = %.2f \n" \
+            "with Errors: o_a = %.3f, o_mu = %.3f, o_std = %.3f" % (scale_factor, mu_delta, sigma_delta,
+                                                                 perr[0], perr[1], perr[2])
+    plt.title(title)
+    plt.savefig(Path + 'Delta.png')
+    plt.clf()
+    plt.close()
+
+    data = plt.hist(delta_res, bins=150, normed=True, color='g')
+    x = [0.5 * (data[1][i] + data[1][i+1]) for i in range(len(data[1])-1)]
+    y = data[0]
+    popt, pcov = optimize.curve_fit(gaus, x, y)
+    perr = np.sqrt(np.diag(pcov))
+    scale_factor = popt[0]
+    mu_delta = popt[1]
+    sigma_delta = popt[2]
+    x_fit = np.linspace(x[0], x[-1], 100)
+    y_fit = gaus(x_fit, *popt)
+    plt.plot(x_fit, y_fit, lw=1, color="r")
+    title = "Fit results: a = %.f, mu = %.2f,  std = %.2f \n" \
+            "with Errors: o_a = %.3f, o_mu = %.3f, o_std = %.3f" % (scale_factor, mu_delta, sigma_delta,
+                                                                 perr[0], perr[1], perr[2])
+    plt.title(title)
+    plt.savefig(Path + 'Delta_scaled.png')
+    plt.clf()
+    plt.close()
+
+    plt.grid(True)
+    plt.plot([0, 1.4], [0, 1.4], 'k-', lw=2)
+    plt.plot(predicted, all_targets_valid[0], ',')
+    plt.savefig(Path + 'Scatter_pred_real.png')
+    plt.clf()
+    plt.close()
+    plt.grid()
+    plt.plot(mse_list)
+    plt.savefig(Path + 'mse.png')
+    plt.clf()
+    plt.close()
