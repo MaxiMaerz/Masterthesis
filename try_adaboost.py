@@ -44,6 +44,8 @@ def generate_array(hdulist, features, targets):
         targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
         print('Selected Feature: ' + hdulist_test[1].columns.names[targets[x]])
     '''return'''
+    data_float = data_float[1:]
+    targets_float = targets_float[1:]
     return data_float, targets_float
 
 
@@ -67,14 +69,15 @@ def select_features(features_list, data):
     double loop over both coloum headings and config
      -> very ugly, if time improve
     '''
+    z=0
     for x in range(0, len(data[1].columns.names)):
         for y in range(0, len(features_list)):
-
             if data[1].columns.names[x] == features_list[y]\
                     and features_list[y][:1] != '!' \
                     and features_list[y][:1] != '#':
                 f_index = np.append(f_index, x)
-                f_dic.update({features_list[y]: x})
+                f_dic.update({z : features_list[y]})
+                z += 1
 
             if features_list[y][:1] == '!' \
                     and features_list[y][1:] == data[1].columns.names[x]:
@@ -178,7 +181,7 @@ def update_weights(Error, weights):
         L_bar += Error[0][i] * weights_normal[Error[-1][i]]
     betha = abs(L_bar/(1-L_bar))
     for i in range(len(Error[-1])):
-        weights[Error[-1][i]] = betha ** (Error[0][i]) * weights_normal[Error[-1][i]]
+        weights[Error[-1][i]] = betha * (Error[0][i]) * weights_normal[Error[-1][i]]
 
 
 def report(grid_scores, n_top=3):
@@ -218,7 +221,6 @@ if __name__ == '__main__':
 
     '''Start the Main'''
 
-
     '''Add the index to track'''
     all_data_test = np.vstack((all_data_test,
                                   np.arange(0, len(all_data_test[0]))))
@@ -241,12 +243,13 @@ if __name__ == '__main__':
         sys.exit('Stop')
 
     '''Generate List of Estimators'''
-
+    print(len(all_data_test[:,]))
     estimator_list = []
     hyper_parameter = 0
     mse_list = []
     start = time()
     n_estimators = 1000
+
 
     for iter in range(0, n_estimators):
         '''waste computing power for loading bar'''
@@ -274,7 +277,7 @@ if __name__ == '__main__':
 
     stop = time()
 
-    print('Execution time : ' + str(np.round(stop-start, 3)) + ' seconds' + '\n'
+    print('\nExecution time : ' + str(np.round(stop-start, 3)) + ' seconds' + '\n'
               'at ' +str(iter)+ ' iteration')
     '''Test the estimator'''
     predicted = np.zeros(len(all_data_valid[0]))
@@ -286,15 +289,10 @@ if __name__ == '__main__':
     list_min = []
     list_max = []
     list_all_features = []
-    for est in range(len(estimator_list)):
+    for est in range(0, len(estimator_list)):
         '''Predict and weight by mse'''
         predicted += estimator_list[est].predict(all_data_valid.T) * normalized_mse[est]
         list_all_features.append(estimator_list[est].feature_importances_)
-        list_min.append(estimator_list[est].feature_importances_.argmin())
-        list_max.append(estimator_list[est].feature_importances_.argmax())
-    with open(Path + 'importance', 'w') as file:
-        for item in list_all_features:
-            file.write("{}\n".format(item))
 
 
     '''Get some statistics'''
@@ -306,24 +304,29 @@ if __name__ == '__main__':
           'Mean = ' + str(mean) + '\n')
           #'Delta_res = ' + str(Delta_res) + '\n')
 
+
+    '''Feature importance'''
+    feature_list =[]
+    importance = np.sum(list_all_features, axis=0)
+    for i in range(0, len(feature_index)):
+        feature_list.append(feature_dic[i])
+
+    N = len(feature_index)
+    ind = np.arange(N)    # the x locations for the groups
+    width = 1       # the width of the bars: can also be len(x) sequence
+    p1 = plt.bar(ind, importance/sum(importance), width, color='r')
+    plt.ylabel('fraction a feature was most important')
+    plt.title('Normalized importance of feature')
+    plt.xticks(rotation=70)
+    plt.xticks(ind, feature_list)
+    plt.subplots_adjust(bottom=0.25)
+    plt.savefig(Path + 'Importance.png')
+    plt.clf()
+    plt.close()
+
     '''Fit gausian on delat'''
     mu_delta, std_delta = norm.fit(delta)
     mu_delta_res, std_delta_res = norm.fit(delta_res)
-
-    hist, bins = np.histogram(list_max, bins = 18)
-    hist2, bins2 = np.histogram(list_min, bins = 18)
-    width = 1. * (bins[1] - bins[0])
-    center = (bins[:-1] + bins[1:]) / 2
-    
-    
-    plt.bar(center, hist, align='center', width=width, color='g')
-    plt.savefig(Path + 'best_features.png')
-    plt.clf()
-    plt.close()
-    plt.bar(center, hist2, align='center', width=width, color='r')
-    plt.savefig(Path + 'worst_features.png')
-    plt.clf()
-    plt.close()
 
     '''Plotting histograms'''
     data = plt.hist(delta, bins=150, normed=True, color='g')

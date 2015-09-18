@@ -7,6 +7,8 @@ from time import time
 from matplotlib import pyplot as plt
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import mean_squared_error
+from scipy.stats import norm
+from scipy import optimize
 
 
 def generate_array(hdulist, features, targets):
@@ -79,6 +81,10 @@ def select_features(features_list, data):
 
     return f_index.astype(int), f_dic, t_index.astype(int), t_dic
 
+def gaus(x, a, b, c):
+    return a * np.exp(-(x - b)**2.0 / (2 * c**2))
+
+
 if __name__ == '__main__':
     '''We want all file opening stuff here o avoid confusion'''
     Path = '/home/maxi/data/'
@@ -99,11 +105,56 @@ if __name__ == '__main__':
                                                        feature_index,
                                                        target_index)
     start = time()
-    clf = AdaBoostRegressor(n_estimators=300, loss='exponential')
+    clf = AdaBoostRegressor(DecisionTreeRegressor(max_depth=9), n_estimators=300, loss='exponential')
     clf.fit(all_data_test.T, all_targets_test[0])
     feature_importance = clf.feature_importances_
     stop = time()
     predicted = clf.predict(all_data_valid.T)
+
+    delta = all_targets_valid[0] - predicted
+    mean = np.mean(delta)
+    delta_res = delta / (1 + all_targets_valid[0])
+
+
+    data = plt.hist(delta, bins=150, normed=True, color='g')
+    x = [0.5 * (data[1][i] + data[1][i+1]) for i in range(len(data[1])-1)]
+    y = data[0]
+    popt, pcov = optimize.curve_fit(gaus, x, y)
+    perr = np.sqrt(np.diag(pcov))
+    scale_factor = popt[0]
+    mu_delta = popt[1]
+    sigma_delta = popt[2]
+    x_fit = np.linspace(x[0], x[-1], 100)
+    y_fit = gaus(x_fit, *popt)
+    plt.plot(x_fit, y_fit, lw=1, color="r")
+    title = "Fit results: a = %.f, mu = %.2f,  std = %.2f \n" \
+            "with Errors: o_a = %.3f, o_mu = %.3f, o_std = %.3f" % (scale_factor, mu_delta, sigma_delta,
+                                                                 perr[0], perr[1], perr[2])
+    plt.title(title)
+    plt.savefig(Path + 'Delta.png')
+    plt.clf()
+    plt.close()
+
+    data = plt.hist(delta_res, bins=150, normed=True, color='g')
+    x = [0.5 * (data[1][i] + data[1][i+1]) for i in range(len(data[1])-1)]
+    y = data[0]
+    popt, pcov = optimize.curve_fit(gaus, x, y)
+    perr = np.sqrt(np.diag(pcov))
+    scale_factor = popt[0]
+    mu_delta = popt[1]
+    sigma_delta = popt[2]
+    x_fit = np.linspace(x[0], x[-1], 100)
+    y_fit = gaus(x_fit, *popt)
+    plt.plot(x_fit, y_fit, lw=1, color="r")
+    title = "Fit results: a = %.f, mu = %.2f,  std = %.2f \n" \
+            "with Errors: o_a = %.3f, o_mu = %.3f, o_std = %.3f" % (scale_factor, mu_delta, sigma_delta,
+                                                                 perr[0], perr[1], perr[2])
+    plt.title(title)
+    plt.savefig(Path + 'Delta_scaled.png')
+    plt.clf()
+    plt.close()
+
+
 
     print(mean_squared_error(all_targets_valid[0], predicted, sample_weight=None), abs(start-stop))
     print(feature_importance)
