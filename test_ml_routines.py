@@ -10,27 +10,9 @@ from sklearn.ensemble import AdaBoostRegressor, ExtraTreesRegressor
 from sklearn.ensemble.forest import RandomForestRegressor
 from sklearn.grid_search import GridSearchCV,RandomizedSearchCV
 from operator import itemgetter
-
-
-def get_standart_deviation(data):
-    """
-    Robust Method to calculate Standart deviation
-
-    It uses the 68-95-99.7 Rule to calculate the std
-    :param data: 1D - Array
-    :return: std (float)
-    """
-    assert data.ndim == 1, 'Array not 1-dimensional!'
-    assert data.dtype == float or data.dtype == int, 'Data-Type not understood'
-
-    data_sort = np.sort(data, axis=None)
-    mean_index = np.searchsorted(data_sort, np.mean(data_sort))
-    data_sort -= np.mean(data_sort)
-    p_std = data_sort[mean_index + int(0.341344746 * len(data_sort))]
-    m_std = data_sort[mean_index - int(0.341344746 * len(data_sort))]
-    std = (abs(p_std) + abs(m_std))/2
-    return std
-
+from Custom_Statistics import *
+from Import_Astrofits import *
+from astropy.io import fits
 
 def lorentz_system(t, q):
     x = q[0]
@@ -75,6 +57,7 @@ def report(grid_scores, n_top=3):
 
 
 if __name__ == '__main__':
+    '''
     t = np.zeros((50001))
     x_t = np.zeros((50001))
     print(t)
@@ -84,13 +67,13 @@ if __name__ == '__main__':
     solver = ode(lorentz_system)
     solver.set_initial_value(x_0, 0)
     solver.set_integrator('dopri5')
-    '''
+
     while solver.successful() and solver.t < 500:
         solver.integrate(solver.t + dt)
         t[i] = solver.t
         x_t[i] = solver.y[0]
         i += 1
-    '''
+
     sinus = np.sin((np.arange(0, 501, 0.01)/501*2*np.pi))
     for i in range(len(sinus)):
         sinus[i] += +np.random.normal(0, 100)/100
@@ -99,7 +82,9 @@ if __name__ == '__main__':
     #sinus_train, sinus_test, time_train, time_test = train_test_split(x_t, t, test_size=0.2)
     print(time_train.shape, sinus_train.shape)
 
-    '''
+
+
+
     clf = DecisionTreeRegressor()
     param_dist = {"max_depth": np.arange(3,100,1)}
     random_search = GridSearchCV(clf, param_grid=param_dist)
@@ -108,27 +93,47 @@ if __name__ == '__main__':
     exit()
     '''
 
-    clf_adaboost = AdaBoostRegressor(DecisionTreeRegressor(max_depth=49), n_estimators=50,
+
+    '''We want all file opening stuff here o avoid confusion'''
+    Path = '/home/maxi/data/'
+
+    '''Opening data and config files'''
+    hdulist_test = fits.open(Path + 'y1a1_stripe82_train_subset.fits')
+    hdulist_valid = fits.open(Path + 'y1a1_stripe82_valid_subset.fits')
+    feature_conf = [line.strip() for line in open(Path + '/fields.conf', 'r')]
+
+
+    '''Get config aa'''
+    feature_index, feature_dic, target_index, target_dic = select_features(feature_conf, hdulist_test)
+    '''Get data'''
+    all_data_test, all_targets_test = generate_array(hdulist_test,
+                                                     feature_index,
+                                                     target_index)
+    all_data_valid, all_targets_valid = generate_array(hdulist_valid,
+                                                       feature_index,
+                                                       target_index)
+    '''Start the Main'''
+
+    clf_adaboost = AdaBoostRegressor(DecisionTreeRegressor(max_depth=25), n_estimators=100,
                                                            loss='exponential', random_state=0)
-    clf_extra_trees = ExtraTreesRegressor(n_estimators=50, random_state=0, max_depth=49)
-    clf_random_forest = RandomForestRegressor(n_estimators=50, random_state=0, max_depth=49)
+    clf_extra_trees = ExtraTreesRegressor(n_estimators=100, random_state=0, max_depth=25)
+    clf_random_forest = RandomForestRegressor(n_estimators=100, random_state=0, max_depth=25)
 
-    clf_adaboost.fit(np.expand_dims(time_train,axis=1), sinus_train)
-    predicted = clf_adaboost.predict(np.expand_dims(time_test, axis=1))
+    clf_adaboost.fit(all_data_test.T, all_targets_test[0])
+    predicted = clf_adaboost.predict(all_data_valid.T)
 
-    clf_extra_trees.fit(np.expand_dims(time_train,axis=1), sinus_train)
-    predicted_extra = clf_extra_trees.predict(np.expand_dims(time_test, axis=1))
+    clf_extra_trees.fit(all_data_test.T, all_targets_test[0])
+    predicted_extra = clf_extra_trees.predict(all_data_valid.T)
 
-    clf_random_forest.fit(np.expand_dims(time_train,axis=1), sinus_train)
-    predicted_forest = clf_random_forest.predict(np.expand_dims(time_test, axis=1))
+    clf_random_forest.fit(all_data_test.T, all_targets_test[0])
+    predicted_forest = clf_random_forest.predict(all_data_valid.T)
 
-    print(time_train.shape, sinus_train.shape)
-    delta_ada = sinus_test - predicted
-    delta_extra = sinus_test - predicted_extra
-    delta_forest = sinus_test - predicted_forest
-    std_ada = get_standart_deviation(delta_ada)
-    std_extra = get_standart_deviation(delta_extra)
-    std_forest = get_standart_deviation(delta_forest)
+    delta_ada = all_targets_valid[0] - predicted
+    delta_extra = all_targets_valid[0] - predicted_extra
+    delta_forest = all_targets_valid[0] - predicted_forest
+    std_ada, std95_ada, outliner_ada = get_standart_deviation(delta_ada)
+    std_extra, std95_extra, outliner_extra = get_standart_deviation(delta_extra)
+    std_forest, std95_forest, outliner_forest = get_standart_deviation(delta_forest)
 
     plt.hist(delta_ada, bins=150, color='g', label='Adaboost '+str(np.round(std_ada,4)))
     plt.hist(delta_extra, bins=150, color='b', label='Extra_Trees '+str(np.round(std_extra,4)))
@@ -139,6 +144,10 @@ if __name__ == '__main__':
     plt.show()
     plt.clf()
     plt.close()
+    print('Adaboost: ', std_ada, std95_ada, outliner_ada, '\n',
+          'Extra_trees: ', std_extra, std95_extra, outliner_extra, '\n',
+          'Random_forest: ', std_forest, std95_forest, outliner_extra)
+    print(clf_adaboost.feature_importances_)
     '''
     plt.plot(time_test, sinus_test, ',', color='red')
     plt.plot(time_test, predicted, ',', color='b')
