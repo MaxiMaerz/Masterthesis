@@ -28,11 +28,11 @@ def choose_random_data(data, target, weight, length):
     return random_data, random_target
 
 
-def build_weighted_tree(data, target, parameter):
+def build_weighted_tree(x_train, y_train, x_test, y_test, parameter):
     """
     We construct a Tree via skipi_tree_regressor and calculate the MSE and update weights
 
-    Note: we use train_test_split to get a valisation sample
+    Note: we use train_test_split to get a validation sample
     :param data: np.array
     :param target: np.array
     :param parameter: Hyperparameters for the tree (not implemented)
@@ -41,11 +41,12 @@ def build_weighted_tree(data, target, parameter):
     """
 
     '''Split data  -> not possible we need to track the index for weight update.....'''
-    x_train, x_test, y_train, y_test = train_test_split(data, target[0], test_size=0.5)
+    #x_train, x_test, y_train, y_test = train_test_split(data, target[0], test_size=0.5)
 
     '''Build tree slice last coloumn (its just index)'''
+    #print(x_train.shape, y_train.shape, x_test.shape, y_test.shape)
     clf = tree.DecisionTreeRegressor(max_depth=parameter)
-    clf.fit(x_train[:, 0:-1], y_train)
+    clf.fit(x_train[:, 0:-1], y_train[0])
     predicted = clf.predict(x_test[:, 0:-1])
 
     '''Calculate Mean squared Error'''
@@ -84,6 +85,6 @@ def update_weights(Error, weights):
     betha = abs(L_bar/(1-L_bar))
     for i in range(len(Error[-1])):
         #weights[Error[-1][i]] = betha * (Error[0][i]) * weights_normal[Error[-1][i]] #linear
-        weights[Error[-1][i]] = betha * np.exp(1-(Error[0][i])) * weights_normal[Error[-1][i]] #exponential loss
-        #weights[Error[-1][i]] = betha * np.exp(-(Error[0][i])) * weights_normal[Error[-1][i]] #exponential gain
+        #weights[Error[-1][i]] = betha * np.exp(1-(Error[0][i])) * weights_normal[Error[-1][i]] #exponential loss
+        weights[Error[-1][i]] = betha * np.exp(-(Error[0][i])) * weights_normal[Error[-1][i]] #exponential gain
         #weights[Error[-1][i]] = betha * np.exp((Error[0][i])) * weights_normal[Error[-1][i]] #exponential gain

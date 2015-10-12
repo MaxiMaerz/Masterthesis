@@ -112,29 +112,50 @@ if __name__ == '__main__':
     all_data_valid, all_targets_valid = generate_array(hdulist_valid,
                                                        feature_index,
                                                        target_index)
+    print(len(all_data_test.T), len(all_targets_test[0]))
+    std_list = []
     '''Start the Main'''
-
     clf_adaboost = AdaBoostRegressor(DecisionTreeRegressor(max_depth=25), n_estimators=100,
-                                                           loss='exponential', random_state=0)
-    clf_extra_trees = ExtraTreesRegressor(n_estimators=100, random_state=0, max_depth=25)
-    clf_random_forest = RandomForestRegressor(n_estimators=100, random_state=0, max_depth=25)
+                                     loss='exponential', random_state=0)
+    #clf_extra_trees = ExtraTreesRegressor(n_estimators=100, random_state=0, max_depth=25)
+    #clf_random_forest = RandomForestRegressor(n_estimators=100, random_state=0, max_depth=25)
 
     clf_adaboost.fit(all_data_test.T, all_targets_test[0])
     predicted = clf_adaboost.predict(all_data_valid.T)
 
-    clf_extra_trees.fit(all_data_test.T, all_targets_test[0])
-    predicted_extra = clf_extra_trees.predict(all_data_valid.T)
+    #clf_extra_trees.fit(all_data_test.T, all_targets_test[0])
+    #predicted_extra = clf_extra_trees.predict(all_data_valid.T)
 
-    clf_random_forest.fit(all_data_test.T, all_targets_test[0])
-    predicted_forest = clf_random_forest.predict(all_data_valid.T)
+    #clf_random_forest.fit(all_data_test.T, all_targets_test[0])
+    #predicted_forest = clf_random_forest.predict(all_data_valid.T)
 
-    delta_ada = all_targets_valid[0] - predicted
-    delta_extra = all_targets_valid[0] - predicted_extra
-    delta_forest = all_targets_valid[0] - predicted_forest
+    delta_ada = (all_targets_valid[0] - predicted) / (1 + all_targets_valid[0])
+    #delta_extra = all_targets_valid[0] - predicted_extra
+    #delta_forest = all_targets_valid[0] - predicted_forest
     std_ada, std95_ada, outliner_ada = get_standart_deviation(delta_ada)
-    std_extra, std95_extra, outliner_extra = get_standart_deviation(delta_extra)
-    std_forest, std95_forest, outliner_forest = get_standart_deviation(delta_forest)
+    std_list.append(std_ada)
+    print(std_ada, std95_ada, outliner_ada)
 
+    feature_list =[]
+    for i in range(0, len(feature_index)):
+        feature_list.append(feature_dic[feature_index[i]])
+    N = len(feature_index)
+    ind = np.arange(N)    # the x locations for the groups
+    width = 1       # the width of the bars: can also be len(x) sequence
+    p1 = plt.bar(ind, clf_adaboost.feature_importances_, width, color='r')
+    plt.ylabel('Relative Feature Importance')
+    plt.title('Normalized importance of feature')
+    plt.xticks(rotation=70)
+    plt.xticks(ind, feature_list)
+    plt.subplots_adjust(bottom=0.25)
+    plt.show()
+    #std_extra, std95_extra, outliner_extra = get_standart_deviation(delta_extra)
+    #std_forest, std95_forest, outliner_forest = get_standart_deviation(delta_forest)
+
+    with open(Path+'performance.txt', 'w') as file:
+        for item in std_list:
+            file.write("{}\n".format(item))
+    """
     plt.hist(delta_ada, bins=150, color='g', label='Adaboost '+str(np.round(std_ada,4)))
     plt.hist(delta_extra, bins=150, color='b', label='Extra_Trees '+str(np.round(std_extra,4)))
     plt.hist(delta_forest, bins=150, color='r', label='Random_Forest '+str(np.round(std_forest,4)))
@@ -148,8 +169,4 @@ if __name__ == '__main__':
           'Extra_trees: ', std_extra, std95_extra, outliner_extra, '\n',
           'Random_forest: ', std_forest, std95_forest, outliner_extra)
     print(clf_adaboost.feature_importances_)
-    '''
-    plt.plot(time_test, sinus_test, ',', color='red')
-    plt.plot(time_test, predicted, ',', color='b')
-    plt.show()
-    '''
+    """

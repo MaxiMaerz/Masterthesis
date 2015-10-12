@@ -66,26 +66,22 @@ if __name__ == '__main__':
         random_slice_data, random_slice_target = choose_random_data(all_data_test,
                                                                     all_targets_test,
                                                                     all_targets_test[-1],
-                                                                    3000)
+                                                                    30000)
 
         '''Append new Estimator to List'''
+        #print(all_data_test.shape, all_targets_test[0].shape)
         estimator, error_array, mean_s_error = build_weighted_tree(random_slice_data.T,
                                                                    random_slice_target,
+                                                                   all_data_test.T,
+                                                                   all_targets_test[0],
                                                                    25)
-
+        mse_list.append(mean_s_error)
         estimator_list.append(estimator)
         #-> pop estimators which are random (error > 0.5)
-
-        mse_list.append(mean_s_error)
-
         '''update weights'''
         update_weights(error_array, all_targets_test[-1])
 
     stop = time()
-
-
-
-
 
     print('\nExecution time : ' + str(np.round(stop-start, 3)) + ' seconds' + '\n'
              'at ' +str(iter)+ ' iteration')
@@ -115,13 +111,11 @@ if __name__ == '__main__':
     outliners = get_outliner_fraction(predicted, all_targets_valid[0])
 
     '''Feature importance'''
-
+    print('Sigma_68: '+ str(sigma68_delta))
     feature_list =[]
     importance = np.sum(list_all_features, axis=0)
     for i in range(0, len(feature_index)):
         feature_list.append(feature_dic[feature_index[i]])
-    print(len(importance))
-    print(len(feature_list))
     N = len(feature_index)
     ind = np.arange(N)    # the x locations for the groups
     width = 1       # the width of the bars: can also be len(x) sequence

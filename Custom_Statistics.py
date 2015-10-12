@@ -50,11 +50,9 @@ def get_outliner_fraction(estimate, validation):
     delta_res = delta / (1 + validation)
 
     x = 0
-    for i in range(0, len(estimate)):
-        if delta_res[i] > 0.15:
-            x += 1
-
+    np.sum(abs(delta_res) > 0.15)/len(delta_res)
     outliner_fraction = x / len(estimate)
+
 
     return outliner_fraction
 
@@ -93,7 +91,6 @@ def gaus(x, mean, std):
     :param std: Standart - Deviation Sigma
     :return: fkt Gaussian shaped y - values
     """
-    print(std, mean,'!!!!')
     fkt = np.empty(len(x))
     for i in range(0, len(x)):
         fkt[i] = 1/(std * np.sqrt(2 * np.pi)) * np.exp(- ((x[i] - mean) ** 2) / (2 * std ** 2))
