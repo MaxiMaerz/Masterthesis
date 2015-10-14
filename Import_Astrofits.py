@@ -23,14 +23,17 @@ def generate_array(hdulist, features, targets):
     '''get all float like and feature matching data'''
     data_float = np.array([astro_data.field(0)])
     for x in range(0, len(astro_data[0])):
-        if isinstance(astro_data.field(x)[1], (int, float, complex)) is True\
-                        and x not in targets and x in features:
+        '''
+        Remove type-Check sth. is broken here
+        if isinstance(astro_data.field(x)[1], (int, float, complex)) is True
+        '''
+        if x not in targets and x in features:
             data_float = np.vstack((data_float, np.squeeze(np.array([astro_data.field(x)]))))
     '''get all and target matching data'''
     targets_float = np.squeeze(np.array(astro_data.field(targets[0])))
     for x in range(len(targets)):
-        targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
-        print('Selected Feature: ' + hdulist[1].columns.names[targets[x]])
+       targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
+       print('Selected Target: ' + hdulist[1].columns.names[targets[x]])
     '''return'''
     data_float = np.delete(data_float, 0, 0)
     return data_float, targets_float

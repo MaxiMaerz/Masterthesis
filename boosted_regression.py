@@ -1,6 +1,8 @@
 from Custom_Statistics import *
 from sklearn import tree
 import sys
+from sklearn.ensemble import weight_boosting
+import weighted
 
 
 class AdaboostRegression:
@@ -16,7 +18,6 @@ class AdaboostRegression:
 
     See also
     --------
-    AdaBoostRegressor, GradientBoostingClassifier, DecisionTreeClassifier
 
     References
     ----------
@@ -34,7 +35,8 @@ class AdaboostRegression:
                  loss_fkt='linear',
                  estimator_list=None,
                  estimator_error=None,
-                 tree_parameters=None
+                 tree_parameters=None,
+                 random_state=None
                  ):
 
         self.n_estimators = n_estimators
@@ -42,7 +44,7 @@ class AdaboostRegression:
         self.tree_parameters = tree_parameters
         self.estimator_list = estimator_list
         self.estimator_weights = []
-
+        self.random_state = random_state
         if tree_parameters is None:
             self.tree_parameters = {'max_depth': 20}
         if self.estimator_list is None:
@@ -63,7 +65,7 @@ class AdaboostRegression:
 
         :return: bootstrapped features, targets and weights
         """
-
+        #'''
         # Select the Index by weight using np.choice
         index_arr = np.arange(0, len(features))
         random_index_arr = np.random.choice(index_arr, size=int(len(features)), replace=True, p=weights)
@@ -107,32 +109,30 @@ class AdaboostRegression:
         predicted = estimator.predict(features)
 
         # Calculate Delta
-        delta = abs(predicted - targets)
+        delta = np.abs(predicted - targets)
 
         # As element-wise loss we use:
         sup = delta.max()
-        if sup != 0:
-            element_loss = delta / delta.max()
+        if sup != 0.:
+            delta /= delta.max()
         else:
             print('delta_max = 0, aborting')
             return 0
 
         if self.loss_fkt == 'exponential':
-            element_loss = 1. - np.exp(- element_loss)
+            delta = 1. - np.exp(- delta)
         if self.loss_fkt == 'square':
-            element_loss **= 2
+            delta **= 2
 
         # Average Loss
-        average_loss = (element_loss * weights).sum()
-
+        average_loss = (delta * weights).sum()
         # Calculate the Confidence
-        betha = average_loss / (1 - average_loss)
-
+        beta = average_loss / (1. - average_loss)
         # Update weights
-        weights = weights * np.power(betha, (1. - element_loss))
 
+        weights = weights * np.power(beta, (1. - delta))
         # Estimator weights
-        estimator_weight = 1. / np.log(betha)
+        estimator_weight = np.log(1. / beta)
 
         return weights, estimator_weight
 
@@ -177,8 +177,8 @@ class AdaboostRegression:
             self.estimator_list.append(estimator)
 
             # Get weights, and update them Error is calculate from the full sample
-            weights, estimator_error = self.update_weights(features, targets, weights, estimator)
-            self.estimator_weights.append(abs(estimator_error))
+            weights, estimator_weight = self.update_weights(features, targets, weights, estimator)
+            self.estimator_weights.append(abs(estimator_weight))
             # Normalize weights
             weights = normalize(weights)
 
@@ -186,7 +186,6 @@ class AdaboostRegression:
             step = self.n_estimators/100
             print('\rTraining: %s (%d%%)' % ("|"*(int(boost_step/(3*step))), boost_step/step), end="")
             sys.stdout.flush()
-
         # Now we have a list of n_estimators weak learners, we will use them to build a strong learner
         return self.estimator_list, self.estimator_weights
 
@@ -195,17 +194,36 @@ class AdaboostRegression:
         """
         makes the prediction with the estimators using skikit_learn decision_trees
 
+        Note: a weighted median is used, which improves sigma, but weakens outliner_rate
         :param features: validation_features
         :param est_list: list of estimators
         :param weight:   weight of the estimators
         :return: prediction_vector
         """
+        '''
+        weighted.median(est_list.predict(features), weight)
         prediction = np.empty(len(features))
         weight = normalize(weight)
         for x in range(len(est_list)):
-            prediction += est_list[x].predict(features)*(weight[x])
-            print(weight[x]/np.sum(weight))
+            #prediction = weighted.median(est_list[x].predict(features), weight[x])
+            prediction += est_list[x].predict(features)
         return prediction
+        '''
+        # Evaluate predictions of all estimators
+        predictions = np.array([
+            est.predict(features) for est in est_list[:len(est_list)]]).T
 
+        # Sort the predictions
+        sorted_idx = np.argsort(predictions, axis=1)
+        weight = np.asarray(weight)
+        # Find index of median prediction for each sample
+        weight_cdf = weight[sorted_idx].cumsum(axis=1)
+        median_or_above = weight_cdf >= 0.5 * weight_cdf[:, -1][:, np.newaxis]
+        median_idx = median_or_above.argmax(axis=1)
+
+        median_estimators = sorted_idx[np.arange(features.shape[0]), median_idx]
+
+        # Return median predictions
+        return predictions[np.arange(features.shape[0]), median_estimators]
 
 
