@@ -1,4 +1,4 @@
-from Custom_Statistics import *
+import numpy as np
 from sklearn import tree
 import sys
 
@@ -87,6 +87,20 @@ class AdaboostRegression:
         clf.fit(x, y)
 
         return clf
+
+    @staticmethod
+    def normalize(vector):
+        """
+        normalize a numpy vector with [i] = [i]/sum[i]
+
+        :param vector: numpy vector
+        :return: normalized vector
+        """
+        if np.sum(vector) != 1.:
+            normalized_vector = vector / np.sum(vector)
+            return normalized_vector
+        else:
+            return vector
 
     def update_weights(self, features, targets, weights, estimator):
         """
@@ -179,7 +193,7 @@ class AdaboostRegression:
             weights, estimator_weight = self.update_weights(features, targets, weights, estimator)
             self.estimator_weights.append(abs(estimator_weight))
             # Normalize weights
-            weights = normalize(weights)
+            weights = self.normalize(weights)
 
             # waste computing power for loading bar
             step = self.n_estimators/100
