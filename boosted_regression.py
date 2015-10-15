@@ -1,8 +1,6 @@
 from Custom_Statistics import *
 from sklearn import tree
 import sys
-from sklearn.ensemble import weight_boosting
-import weighted
 
 
 class AdaboostRegression:
@@ -65,7 +63,7 @@ class AdaboostRegression:
 
         :return: bootstrapped features, targets and weights
         """
-        #'''
+        # '''
         # Select the Index by weight using np.choice
         index_arr = np.arange(0, len(features))
         random_index_arr = np.random.choice(index_arr, size=int(len(features)), replace=True, p=weights)
@@ -130,7 +128,8 @@ class AdaboostRegression:
         beta = average_loss / (1. - average_loss)
         # Update weights
 
-        weights = weights * np.power(beta, (1. - delta))
+        # noinspection PyTypeChecker
+        weights = weights * np.power(beta, 1. - delta)
         # Estimator weights
         estimator_weight = np.log(1. / beta)
 
@@ -147,7 +146,7 @@ class AdaboostRegression:
         """
 
         # Check Data
-        if False: #len(features) != len(targets):
+        if False:  # len(features) != len(targets):
             raise ValueError('feature length: ' + str(len(features)) +
                              ' doesn\'t match target length: ' + str(len(targets)))
 
@@ -205,7 +204,6 @@ class AdaboostRegression:
         prediction = np.empty(len(features))
         weight = normalize(weight)
         for x in range(len(est_list)):
-            #prediction = weighted.median(est_list[x].predict(features), weight[x])
             prediction += est_list[x].predict(features)
         return prediction
         '''
@@ -225,5 +223,3 @@ class AdaboostRegression:
 
         # Return median predictions
         return predictions[np.arange(features.shape[0]), median_estimators]
-
-
