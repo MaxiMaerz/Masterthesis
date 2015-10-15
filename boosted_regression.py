@@ -7,6 +7,9 @@ class AdaboostRegression:
     """
     Class for boosted regressions, using tree based methods
 
+    Requirements:
+                numpy and sklearn
+
     Params:
             -for now Decision_tree_classifier will be used as the weak learner
 
