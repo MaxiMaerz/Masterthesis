@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/compare_adaboost.py" line="55" mnemonic="7" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Extended_statistics.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PHAT1_best.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Custom_Statistics.py" afterPath="$PROJECT_DIR$/Custom_Statistics.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DataAugmentation.py" afterPath="$PROJECT_DIR$/DataAugmentation.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Import_Astrofits.py" afterPath="$PROJECT_DIR$/Import_Astrofits.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/boosted_regression.py" afterPath="$PROJECT_DIR$/boosted_regression.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compare_adaboost.py" afterPath="$PROJECT_DIR$/compare_adaboost.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/get_fields.py" afterPath="$PROJECT_DIR$/get_fields.py" />
+    <list default="true" id="83119b4b-d618-4dac-866f-af59c0bc1dab" name="Default" comment="&quot;added comment&quot;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Import_data.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Masterthesis.iws" />
@@ -34,11 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Custom_Statistics.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Custom_Statistics.py">
+      <file leaf-file-name="adaboost_from_lib.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="12" selection-start-line="69" selection-start-column="4" selection-end-line="72" selection-end-column="12" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -49,21 +39,9 @@
       <file leaf-file-name="Extended_statistics.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Extended_statistics.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5304348">
-              <caret line="176" column="40" selection-start-line="176" selection-start-column="40" selection-end-line="176" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="boosted_regression.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/boosted_regression.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -84,11 +62,6 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="just_loop_missing" />
-      </map>
-    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -102,33 +75,7 @@
         <option value="$PROJECT_DIR$/decision_tree_tester.py" />
         <option value="$PROJECT_DIR$/try_adabiist.py" />
         <option value="$PROJECT_DIR$/generate_matrix.py" />
-        <option value="$PROJECT_DIR$/adaboost_from_lib.py" />
-        <option value="$PROJECT_DIR$/real_data_comperisson.py" />
-        <option value="$PROJECT_DIR$/Import_data.py" />
-        <option value="$USER_HOME$/Backup/PycharmProjects/Masterthesis/ImportData.py" />
-        <option value="$USER_HOME$/Backup/PycharmProjects/Masterthesis/Import_Data.py" />
-        <option value="$PROJECT_DIR$/custom_adaboost.py" />
         <option value="$PROJECT_DIR$/try_adaboost.py" />
-        <option value="$PROJECT_DIR$/test_ml_routines.py" />
-        <option value="$USER_HOME$/python_kcorrect/kcorrect_python-2013.10.12/setup.py" />
-        <option value="/usr/lib/python3.5/site-packages/sklearn/ensemble/weight_boosting.py" />
-        <option value="$PROJECT_DIR$/hack.py" />
-        <option value="/tmp/client.py" />
-        <option value="$PROJECT_DIR$/DataAugmentation.py" />
-        <option value="$USER_HOME$/Documents/test.ipynb" />
-        <option value="$PROJECT_DIR$/test.ipynb" />
-        <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/compare_adaboost.py" />
-        <option value="$USER_HOME$/Downloads/Untitled2 (1).py" />
-        <option value="$PROJECT_DIR$/fdsfas.py" />
-        <option value="$PROJECT_DIR$/Import_Astrofits.py" />
-        <option value="$PROJECT_DIR$/get_fields.py" />
-        <option value="/usr/lib/python3.5/site-packages/sklearn/__check_build/__init__.py" />
-        <option value="$PROJECT_DIR$/Custom_Statistics.py" />
-        <option value="$PROJECT_DIR$/Phat1_best.py" />
-        <option value="$PROJECT_DIR$/PHAT1_best.py" />
-        <option value="$PROJECT_DIR$/boosted_regression.py" />
-        <option value="$PROJECT_DIR$/Extended_statistics.py" />
       </list>
     </option>
   </component>
@@ -265,8 +212,8 @@
   <component name="PropertiesComponent">
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/boosted_regression.py" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/astropy_show_data.py" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
@@ -274,8 +221,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.PHAT1_best">
-    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.try_adaboost">
+    <configuration default="false" name="astropy_show_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -287,12 +234,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Masterthesis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/astropy_show_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="compare_adaboost" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="generate_matrix" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -304,29 +251,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Masterthesis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/compare_adaboost.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/generate_matrix.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Untitled2 (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Masterthesis" />
-      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/Untitled2 (1).py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="get_fields" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="failed_generate_matrix" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -338,12 +268,12 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Masterthesis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/get_fields.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/failed_generate_matrix.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="PHAT1_best" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="decision_tree_tester" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -355,7 +285,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Masterthesis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PHAT1_best.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/decision_tree_tester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="try_adaboost" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Masterthesis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/try_adaboost.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -483,19 +430,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.compare_adaboost" />
-      <item index="2" class="java.lang.String" itemvalue="Python.Untitled2 (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.get_fields" />
-      <item index="4" class="java.lang.String" itemvalue="Python.PHAT1_best" />
+      <item index="0" class="java.lang.String" itemvalue="Python.astropy_show_data" />
+      <item index="1" class="java.lang.String" itemvalue="Python.generate_matrix" />
+      <item index="2" class="java.lang.String" itemvalue="Python.failed_generate_matrix" />
+      <item index="3" class="java.lang.String" itemvalue="Python.decision_tree_tester" />
+      <item index="4" class="java.lang.String" itemvalue="Python.try_adaboost" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.PHAT1_best" />
-        <item index="1" class="java.lang.String" itemvalue="Python.get_fields" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Untitled2 (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python.compare_adaboost" />
-        <item index="4" class="java.lang.String" itemvalue="Python.test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.try_adaboost" />
+        <item index="1" class="java.lang.String" itemvalue="Python.generate_matrix" />
+        <item index="2" class="java.lang.String" itemvalue="Python.decision_tree_tester" />
+        <item index="3" class="java.lang.String" itemvalue="Python.astropy_show_data" />
+        <item index="4" class="java.lang.String" itemvalue="Python.failed_generate_matrix" />
       </list>
     </recent_temporary>
   </component>
@@ -540,200 +487,29 @@
       <option name="project" value="LOCAL" />
       <updated>1441898053879</updated>
     </task>
-    <task id="LOCAL-00006" summary="&quot;correctet feature selection(wrong loop index), added weight array&quot;">
-      <created>1441958543316</created>
-      <option name="number" value="00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1441958543316</updated>
-    </task>
-    <task id="LOCAL-00007" summary="&quot;correctet feature selection(wrong loop index), added weight array&quot;">
-      <created>1441970689867</created>
-      <option name="number" value="00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1441970689867</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fixed random_slice">
-      <created>1441970723588</created>
-      <option name="number" value="00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1441970723588</updated>
-    </task>
-    <task id="LOCAL-00009" summary="fixed random_slice">
-      <created>1441970729892</created>
-      <option name="number" value="00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1441970729892</updated>
-    </task>
-    <task id="LOCAL-00010" summary="removed stuff">
-      <created>1441971696641</created>
-      <option name="number" value="00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1441971696641</updated>
-    </task>
-    <task id="LOCAL-00011" summary="removed stuff">
-      <created>1441971702924</created>
-      <option name="number" value="00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1441971702924</updated>
-    </task>
-    <task id="LOCAL-00012" summary="removed stuff all stuff but adaboost">
-      <created>1441971764310</created>
-      <option name="number" value="00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1441971764310</updated>
-    </task>
-    <task id="LOCAL-00013" summary="removed stuff all stuff but adaboost">
-      <created>1441979942863</created>
-      <option name="number" value="00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1441979942863</updated>
-    </task>
-    <task id="LOCAL-00014" summary="made correction (weights) and started on the weightening iteration">
-      <created>1441979979154</created>
-      <option name="number" value="00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1441979979154</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Added index column, &#10;weights get updated still not sure about update function,&#10;-&gt; loop still missing">
-      <created>1442220673560</created>
-      <option name="number" value="00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1442220673560</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Added index column, &#10;weights get updated still not sure about update function,&#10;-&gt; loop still missing">
-      <created>1442220808653</created>
-      <option name="number" value="00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1442220808653</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing">
-      <created>1442237332635</created>
-      <option name="number" value="00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1442237332635</updated>
-    </task>
-    <task id="LOCAL-00018" summary="added feature importance&#10;-&gt; Need to check maybe add unit testing">
-      <created>1442240873947</created>
-      <option name="number" value="00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1442240873947</updated>
-    </task>
-    <task id="LOCAL-00019" summary="added feature importance&#10;-&gt; Need to check maybe add unit testing">
-      <created>1442240910657</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1442240910657</updated>
-    </task>
-    <task id="LOCAL-00020" summary="added feature importance&#10;added stuff&#10;-&gt; Need to check maybe add unit testing">
-      <created>1442243119841</created>
-      <option name="number" value="00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1442243119841</updated>
-    </task>
-    <task id="LOCAL-00021" summary="added feature importance&#10;added ploting&#10;-&gt; Need to check maybe add unit testing&#10;-&gt; Need to add more statistics">
-      <created>1442324073659</created>
-      <option name="number" value="00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1442324073659</updated>
-    </task>
-    <task id="LOCAL-00022" summary="feature importance finished&#10;-&gt; Need to check maybe add unit testing&#10;-&gt; need to add 68-95-997 rule">
-      <created>1442568471010</created>
-      <option name="number" value="00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1442568471010</updated>
-    </task>
-    <task id="LOCAL-00023" summary="feature importance finished&#10;-&gt; Need to check maybe add unit testing&#10;-&gt; need to add 68-95-997 rule">
-      <created>1443083674654</created>
-      <option name="number" value="00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1443083674654</updated>
-    </task>
-    <task id="LOCAL-00024" summary="feature importance finished&#10;-&gt; Need to check maybe add unit testing&#10;-&gt; need to add 68-95-997 rule">
-      <created>1443182734573</created>
-      <option name="number" value="00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1443182734573</updated>
-    </task>
-    <task id="LOCAL-00025" summary="cut out some Methods">
-      <created>1443182764434</created>
-      <option name="number" value="00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1443182764434</updated>
-    </task>
-    <task id="LOCAL-00026" summary="added adaboost from lib + statistics,&#10;got more functions">
-      <created>1444381377107</created>
-      <option name="number" value="00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1444381377107</updated>
-    </task>
-    <task id="LOCAL-00027" summary="createt Adaboost_class,&#10;fit function ready,&#10;untested">
-      <created>1444661004694</created>
-      <option name="number" value="00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1444661004694</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Adaboost_class finished, using the Adaboost.R2 for regression,">
-      <created>1444741104948</created>
-      <option name="number" value="00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1444741104948</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Adaboost working and debugged -&gt; weighted median added">
-      <created>1444834245844</created>
-      <option name="number" value="00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1444834245844</updated>
-    </task>
-    <task id="LOCAL-00030" summary="no warnings anymore">
-      <created>1444908367619</created>
-      <option name="number" value="00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1444908367619</updated>
-    </task>
-    <task id="LOCAL-00031" summary="added normalize">
-      <created>1444908532019</created>
-      <option name="number" value="00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1444908532019</updated>
-    </task>
-    <task id="LOCAL-00032" summary="final adaboost regressor">
-      <created>1444908602602</created>
-      <option name="number" value="00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1444908602602</updated>
-    </task>
-    <option name="localTasksCounter" value="33" />
+    <option name="localTasksCounter" value="6" />
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-10" y="19" width="1600" height="873" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39805827" sideWeight="0.4975" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32585752" sideWeight="0.5125" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.592233" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24983944" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39805827" sideWeight="0.4975" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24983944" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34257975" sideWeight="0.4875" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32585752" sideWeight="0.5125" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1816921" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992095" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -774,53 +550,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="&quot;First Upload&quot;" />
     <MESSAGE value="&quot;added comment&quot;" />
-    <MESSAGE value="&quot;correctet feature selection(wrong loop index), added weight array&quot;" />
-    <MESSAGE value="fixed random_slice" />
-    <MESSAGE value="removed stuff" />
-    <MESSAGE value="removed stuff all stuff but adaboost" />
-    <MESSAGE value="made correction (weights) and started on the weightening iteration" />
-    <MESSAGE value="Added index column, &#10;weights get updated still not sure about update function,&#10;-&gt; loop still missing" />
-    <MESSAGE value="Loop working, weights working&#10;-&gt; Need to check maybe add unit testing" />
-    <MESSAGE value="added feature importance&#10;-&gt; Need to check maybe add unit testing" />
-    <MESSAGE value="added feature importance&#10;added stuff&#10;-&gt; Need to check maybe add unit testing" />
-    <MESSAGE value="added feature importance&#10;added ploting&#10;-&gt; Need to check maybe add unit testing&#10;-&gt; Need to add more statistics" />
-    <MESSAGE value="feature importance finished&#10;-&gt; Need to check maybe add unit testing&#10;-&gt; need to add 68-95-997 rule" />
-    <MESSAGE value="cut out some Methods" />
-    <MESSAGE value="added adaboost from lib + statistics,&#10;got more functions" />
-    <MESSAGE value="createt Adaboost_class,&#10;fit function ready,&#10;untested" />
-    <MESSAGE value="Adaboost_class finished, using the Adaboost.R2 for regression," />
-    <MESSAGE value="Adaboost working and debugged -&gt; weighted median added" />
-    <MESSAGE value="no warnings anymore" />
-    <MESSAGE value="added normalize" />
-    <MESSAGE value="final adaboost regressor" />
-    <option name="LAST_COMMIT_MESSAGE" value="final adaboost regressor" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;added comment&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/custom_adaboost.py</url>
-          <line>17</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$USER_HOME$/python_kcorrect/kcorrect_python-2013.10.12/test.py</url>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$USER_HOME$/Downloads/Untitled2 (1).py</url>
-          <line>104</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/compare_adaboost.py</url>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="25" />
+      <option name="time" value="1" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -839,24 +573,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/try_adaboost.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="227" column="70" selection-start-line="227" selection-start-column="70" selection-end-line="227" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="13" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -979,13 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/real_data_comperisson.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="144" column="52" selection-start-line="144" selection-start-column="52" selection-end-line="144" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.4/site-packages/sklearn/ensemble/weight_boosting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6125">
@@ -1005,13 +718,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.45">
           <caret line="12" column="45" selection-start-line="12" selection-start-column="45" selection-end-line="12" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1043,24 +749,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataAugmentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9187359">
-          <caret line="54" column="25" selection-start-line="54" selection-start-column="25" selection-end-line="54" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.5/site-packages/kcorrect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.5688487">
           <caret line="66" column="57" selection-start-line="66" selection-start-column="57" selection-end-line="66" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hack.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1088,31 +780,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/get_fields.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/try_adaboost.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6754967">
           <caret line="139" column="34" selection-start-line="139" selection-start-column="34" selection-end-line="139" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Import_Astrofits.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_ml_routines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="118" column="72" selection-start-line="117" selection-start-column="4" selection-end-line="118" selection-end-column="72" />
         </state>
       </provider>
     </entry>
@@ -1140,26 +811,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PHAT1_best.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.544018">
-          <caret line="129" column="18" selection-start-line="129" selection-start-column="18" selection-end-line="129" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/compare_adaboost.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.5/site-packages/sklearn/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1168,28 +819,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/custom_adaboost.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.9097066">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/boosted_regression.py">
+    <entry file="file://$PROJECT_DIR$/adaboost_from_lib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Custom_Statistics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="12" selection-start-line="69" selection-start-column="4" selection-end-line="72" selection-end-column="12" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -1198,8 +831,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Extended_statistics.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5304348">
-          <caret line="176" column="40" selection-start-line="176" selection-start-column="40" selection-end-line="176" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
