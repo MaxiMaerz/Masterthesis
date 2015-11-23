@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn import tree
-import sys
 
 
 class AdaboostRegression:
@@ -152,13 +151,14 @@ class AdaboostRegression:
 
         return weights, estimator_weight
 
-    def fit(self, features, targets, weights=None):
+    def fit(self, features, targets, weights=None, get_feature_importance=False ):
         """
         Fit the Estimator
 
         :param features: Array like
         :param targets:  1-D array
         :param weights:  1-D Array, default is None
+        :param get_feature_importance: Trigger for feature importance, if true fir will return feature importance
         :return: fitted estimator
         """
 
@@ -181,6 +181,7 @@ class AdaboostRegression:
         if round(np.sum(weights), 10) != 1.:
             raise ValueError('weights not normalized! ' + str(np.sum(weights)))
 
+        importance = np.zeros((1, len(features[0])))
         # Assume all is fine, start the iteration
         for boost_step in range(self.n_estimators):
             # Bootstrap/choose the training data
@@ -197,13 +198,19 @@ class AdaboostRegression:
             self.estimator_weights.append(abs(estimator_weight))
             # Normalize weights
             weights = self.normalize(weights)
-
+            if get_feature_importance is True:
+                importance = np.vstack((importance, estimator.feature_importances_))
             # waste computing power for loading bar
-            step = self.n_estimators/100
-            print('\rTraining: %s (%d%%)' % ("|"*(int(boost_step/(3*step))), boost_step/step), end="")
-            sys.stdout.flush()
+            #step = self.n_estimators/100
+            #print('\rTraining: %s (%d%%)' % ("|"*(int(boost_step/(3*step))), boost_step/step), end="")
+            #sys.stdout.flush()
         # Now we have a list of n_estimators weak learners, we will use them to build a strong learner
-        return self.estimator_list, self.estimator_weights
+        if get_feature_importance is False:
+            return self.estimator_list, self.estimator_weights
+
+        if get_feature_importance is True:
+            importance = np.delete(importance,0,0)
+            return self.estimator_list, self.estimator_weights, importance
 
     @staticmethod
     def predict(features, est_list, weight):
@@ -240,3 +247,6 @@ class AdaboostRegression:
 
         # Return median predictions
         return predictions[np.arange(features.shape[0]), median_estimators]
+
+
+

@@ -37,6 +37,12 @@ if __name__ == '__main__':
     # generate more features
     
 
+
+
+
+
+
+
     # start = time()
     # clf_adaboost = AdaBoostRegressor(DecisionTreeRegressor(max_depth=40), n_estimators=20,
     #                                  loss='exponential', random_state=0)
@@ -49,13 +55,15 @@ if __name__ == '__main__':
     # stop = time()
     # print('Execution Time = ', stop-start)
     start = time()
-    tree_para = {'max_depth':40}
-    clf = AdaboostRegression(n_estimators=20, loss_fkt='exponential', tree_parameters=tree_para)
+    tree_para = {'max_depth':20}
+    clf = AdaboostRegression(n_estimators=10, loss_fkt='exponential', tree_parameters=tree_para)
     estimator, weights = clf.fit(all_data_train.T, all_targets_train[0].T)
 
     prediction = clf.predict(all_data_valid.T, estimator, weights)
 
     delta = all_targets_valid[0] - prediction
+    plt.hist(delta, bins=100)
+    plt.show()
     print(get_standart_deviation(delta))
     stop = time()
     print('Execution Time = ', stop-start)

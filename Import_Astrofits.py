@@ -11,11 +11,7 @@ def generate_array(hdulist, features, targets):
     :param targets: Desired teargets
     :return: data_float array with targets, targets_float array with features
     """
-    """
-    #To do:
-        -get targets and features via .conf file
-            -> use     field_names = hdulist_test[1].columns.names
-    """
+
 
     '''extract data'''
     astro_data = hdulist[1].data
@@ -32,10 +28,11 @@ def generate_array(hdulist, features, targets):
     '''get all and target matching data'''
     targets_float = np.squeeze(np.array(astro_data.field(targets[0])))
     for x in range(len(targets)):
-       targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
-       print('Selected Target: ' + hdulist[1].columns.names[targets[x]])
+        targets_float = np.vstack((targets_float, np.squeeze(np.array(astro_data.field(targets[x])))))
+        #print('Selected Target: ' + hdulist[1].columns.names[targets[x]])
     '''return'''
     data_float = np.delete(data_float, 0, 0)
+    targets_float = np.delete(targets_float,0,0)
     return data_float, targets_float
 
 
