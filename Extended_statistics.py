@@ -164,7 +164,7 @@ class PhotoZStatistics:
                 else:
                     print('Invalid choice of axis axis = ' + str(self.axis))
                     vals = -1
-
+                return vals, vals_res
             return vals
 
     def get_outliner_fraction(self, data, axis=None):

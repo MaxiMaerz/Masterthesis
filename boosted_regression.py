@@ -202,7 +202,7 @@ class AdaboostRegression:
                 importance = np.vstack((importance, estimator.feature_importances_))
             # waste computing power for loading bar
             #step = self.n_estimators/100
-            #print('\rTraining: %s (%d%%)' % ("|"*(int(boost_step/(3*step))), boost_step/step), end="")
+            #print('\rTraining: %s (%d%%)' % ("|"*(int(boost_step/(3*step))), boost_step/step))
             #sys.stdout.flush()
         # Now we have a list of n_estimators weak learners, we will use them to build a strong learner
         if get_feature_importance is False:
